@@ -1,0 +1,19 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "test discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StudioKiyomidai/discordBot.git"
+  },
+  "author": "watashi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StudioKiyomidai/discordBot/issues"
+  },
+  "homepage": "https://github.com/StudioKiyomidai/discordBot#readme"
+}
