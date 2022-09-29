@@ -7,13 +7,13 @@ client.once('ready', async () => { //ここにボットが起動した際のコ�
         name: "ping",
         description: "Replies with Pong!",
     }];
-    await client.application.commands.set(data, process.env.GUILD_ID);
+    await client.application.commands.set(data);
     console.log('起動完了'); //黒い画面(コンソール)に「起動完了」と表示させる
 });
 client.login(process.env.DISCORD_BOT_TOKEN);
 
 client.on("interactionCreate", async (interaction) => {
-    if (!interaction.isCommand()) {
+    if (interaction.type !== InteractionType.ApplicationCommand) {
         return;
     }
     if (interaction.commandName === 'ping') {
