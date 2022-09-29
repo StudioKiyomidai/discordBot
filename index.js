@@ -1,4 +1,4 @@
-const { Client, Intents } = require('discord.js'); //discord.js からClientとIntentsを読み込む
+const { Client, GatewayIntentBits } = require('discord.js'); //discord.js からClientとIntentsを読み込む
 
 const client = new Client({ intents: [GatewayIntentBits.GUILDS, GatewayIntentBits.GUILD_MEMBERS, GatewayIntentBits.GUILD_MESSAGES] });  //clientインスタンスを作成する
 
