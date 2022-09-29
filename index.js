@@ -32,6 +32,7 @@ client.on("interactionCreate", async (interaction) => {
                 interaction.reply(response.data.content);
             });
         } catch (error) {
+            console.log(error)
             interaction.reply('error shiteru na')
         }
 
