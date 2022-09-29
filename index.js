@@ -12,8 +12,8 @@ client.once('ready', async () => {
         options: [
             {
                 type: 3, // string
-                name: "input",
-                description: "何か入力してみて",
+                name: "time",
+                description: "21:00 のように24時間表記で入力",
                 required: true,
             }
         ]
@@ -27,8 +27,21 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 
 const commands = {
     async ping(interaction) {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var timeLimit = interaction.options.get("time")
+        var strTime = year + "/" + month + "/" + day + " " + timeLimit + ":00"
+
+        var parsedTime = Date.parse(strTime);
+        if (isNan(parsedTime)) {
+            interaction.reply('henkan misutteru na');
+            return;
+        }
+
         const jsonData = {
-            message: interaction.options.get("input")
+            message: strTime
         }
         try {
             await axios({
