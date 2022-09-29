@@ -23,7 +23,18 @@ client.on("interactionCreate", async (interaction) => {
         return;
     }
     if (interaction.commandName === 'ping') {
-        await interaction.reply('Pong！');
+        try {
+            await axios({
+                method: "post",
+                url: process.env.GAS_URL,
+                responseType: "json",
+            }).then((response) => {
+                interaction.reply(response.data.content);
+            });
+        } catch (error) {
+            interaction.reply('error shiteru na')
+        }
+
     }
 });
 
