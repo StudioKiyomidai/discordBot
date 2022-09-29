@@ -12,7 +12,7 @@ client.once('ready', async () => {
         options: [
             {
                 type: 3, // string
-                name: "text",
+                name: "input",
                 description: "何か入力してみて",
                 required: true,
             }
