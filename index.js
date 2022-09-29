@@ -8,7 +8,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 client.once('ready', async () => {
     const data = [{
         name: "ping",
-        description: "Replies with Pong!",
+        description: "何か返すよ！",
         options: [
             {
                 type: 3, // string
