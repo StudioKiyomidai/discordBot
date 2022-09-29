@@ -51,7 +51,26 @@ client.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) {
         return;
     }
-    return commands[interaction.commandName](interaction);
+    if (interaction.commandName === 'ping') {
+        const jsonData = {
+            message: interaction.options.getString("text")
+        }
+        try {
+            await axios({
+                method: "post",
+                url: process.env.GAS_URL,
+                data: jsonData,
+                responseType: "json",
+            }).then((response) => {
+                console.log("status: " + response.status)
+                console.log(response.data)
+                interaction.reply("seikou shiteru wayo");
+            });
+        } catch (error) {
+            console.log(error)
+            interaction.reply('error shiteru na')
+        }
+    }
 });
 
 // GASからのリクエスト受付
