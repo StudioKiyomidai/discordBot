@@ -13,7 +13,7 @@ client.once('ready', async () => { //ここにボットが起動した際のコ�
 client.login(process.env.DISCORD_BOT_TOKEN);
 
 client.on("interactionCreate", async (interaction) => {
-    if (interaction.type !== InteractionType.ApplicationCommand) {
+    if (!interaction.isCommand()) {
         return;
     }
     if (interaction.commandName === 'ping') {
