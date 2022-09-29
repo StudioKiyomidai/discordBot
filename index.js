@@ -29,7 +29,7 @@ client.on("interactionCreate", async (interaction) => {
                 url: process.env.GAS_URL,
                 responseType: "json",
             }).then((response) => {
-                console.log(response.data.content)
+                console.log(response.data)
                 interaction.reply("seikou shiteru wayo");
             });
         } catch (error) {
