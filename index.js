@@ -8,7 +8,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 client.once('ready', async () => {
     const data = new SlashCommandBuilder()
         .setName("ping")
-        .setDecription("Replies with Pong!")
+        .setDescription("Replies with Pong!")
         .addStringOption(option =>
             option
                 .setName('text')
