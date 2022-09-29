@@ -28,7 +28,7 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 const commands = {
     async ping(interaction) {
         const jsonData = {
-            message: interaction.options.get("text")
+            message: interaction.options.get("input")
         }
         try {
             await axios({
