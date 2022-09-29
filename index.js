@@ -9,6 +9,14 @@ client.once('ready', async () => {
     const data = [{
         name: "ping",
         description: "Replies with Pong!",
+        options: [
+            {
+                type: "STRING",
+                name: "text",
+                description: "何か入力してみて",
+                required: true,
+            }
+        ]
     }];
     await client.application.commands.set(data);
     console.log('起動完了'); //黒い画面(コンソール)に「起動完了」と表示させる
@@ -17,16 +25,16 @@ client.once('ready', async () => {
 // ログイン
 client.login(process.env.DISCORD_BOT_TOKEN);
 
-// スラッシュコマンドの設定
-client.on("interactionCreate", async (interaction) => {
-    if (!interaction.isCommand()) {
-        return;
-    }
-    if (interaction.commandName === 'ping') {
+const commands = {
+    async ping(interaction) {
+        const jsonData = {
+            message: interaction.options.get("text")
+        }
         try {
             await axios({
                 method: "post",
                 url: process.env.GAS_URL,
+                data: jsonData,
                 responseType: "json",
             }).then((response) => {
                 console.log("status: " + response.status)
@@ -37,8 +45,17 @@ client.on("interactionCreate", async (interaction) => {
             console.log(error)
             interaction.reply('error shiteru na')
         }
-
+        return;
     }
+};
+
+
+// スラッシュコマンドの設定
+client.on("interactionCreate", async (interaction) => {
+    if (!interaction.isCommand()) {
+        return;
+    }
+    return commands[interaction.commandName](interaction);
 });
 
 // GASからのリクエスト受付
