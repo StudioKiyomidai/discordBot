@@ -1,23 +1,19 @@
 const http = require("http");
 const axios = require('axios');
-const { Client, GatewayIntentBits } = require('discord.js'); //discord.js からClientとIntentsを読み込む
+const { Client, GatewayIntentBits, SlashCommandBuilder } = require('discord.js'); //discord.js からClientとIntentsを読み込む
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages] });  //clientインスタンスを作成する
 
 // 起動時実行関数
 client.once('ready', async () => {
-    const data = [{
-        name: "ping",
-        description: "Replies with Pong!",
-        options: [
-            {
-                type: "STRING",
-                name: "text",
-                description: "何か入力してみて",
-                required: true,
-            }
-        ]
-    }];
+    const data = new SlashCommandBuilder()
+        .setName("ping")
+        .setDecription("Replies with Pong!")
+        .addStringOption(option =>
+            option
+                .setName('text')
+                .setDescription('何か入力して')
+        );
     await client.application.commands.set(data);
     console.log('起動完了'); //黒い画面(コンソール)に「起動完了」と表示させる
 });
@@ -28,7 +24,7 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 const commands = {
     async ping(interaction) {
         const jsonData = {
-            message: interaction.options.get("text")
+            message: interaction.options.getString("text")
         }
         try {
             await axios({
