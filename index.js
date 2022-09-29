@@ -37,9 +37,11 @@ const commands = {
                 data: jsonData,
                 responseType: "json",
             }).then((response) => {
-                console.log("status: " + response.status)
-                console.log(response.data.content.value)
-                interaction.reply("seikou shiteru wayo");
+                console.log("status: " + response.status);
+                // GAS側でレスポンスボディのcontentにメッセージ入れているからcontent.valueでとる
+                // ほかにも名前とかとれる
+                // { name: 'input', type: 3, value: 'bgbgbg' }
+                interaction.reply(response.data.content.value);
             });
         } catch (error) {
             console.log(error)
