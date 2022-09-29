@@ -38,7 +38,7 @@ const commands = {
                 responseType: "json",
             }).then((response) => {
                 console.log("status: " + response.status)
-                console.log(response.data.content)
+                console.log(response.data.content.value)
                 interaction.reply("seikou shiteru wayo");
             });
         } catch (error) {
